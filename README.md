@@ -5,6 +5,7 @@ OpenSource webcam streaming website for remote viewing of diy home security syst
 **install requirements:**
 
 pip freeze > requirements.txt
+
 pip install -r requirements.txt
 
 
