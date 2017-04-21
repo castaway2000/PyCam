@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exemp
+# from django.views.decorators.csrf import csrf_exemp
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -58,12 +58,13 @@ def user_logout(request):
 ##################
 def index(request):
     print "index: " + str(request.user)
-    if not request.user.is_active:
-        livestream = 'localcam'
-        context = {"camera": livestream}
+    if request.user.is_authenticated:
+        livestream = 'webcam'
+        context = {'camera': livestream,
+                   'user': request.user,
+                   'username': request.user.username}
         return render(request, '../templates/index.html', context)
-    else:
-        HttpResponseRedirect('../templates/login.html')
+    HttpResponseRedirect('../templates/login.html')
 
 
 #########################
