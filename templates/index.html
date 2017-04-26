@@ -1,13 +1,39 @@
-{% extends 'base.html' %}
-{% block content %}
-    {% load static %}
-    <div style="height: 200px" >
+{% extends 'base.html' %} 
+{% block content %} 
+{% load static %}
+<div class="container" style='background-color: #fbfbfc'>
+    {% csrf_token %}
+    <div class="col-sm-12 col-md-12">
         {% if user.is_authenticated %}
-            <h1>Welcome back {{ user.username }}</h1>
-                    <p>notifications go here</p>
-                    <p>{{camera}}</p>
+        <h1>Welcome back {{ user.username }}
+        </h1>
+        <p>place your externally accessable home network camera streams here like the example below.</p>
+        <p>next stage is to add security to the streams</p>
+        <p>adding ssl encryption is needed and changing the security credentials to the ip camera will help protect from unwanted eyes</p>
+        <p>next series of features is an interface for the credentials and storage for them for now this is how its done: <a href="http://stackoverflow.com/questions/40729450/is-there-an-api-for-foscams-ip-camera-r2">reddit ip cam api question</a></p>
+        <br/>
+        <img style="-webkit-user-select: none;" src="http://200.79.225.83:8080/mjpg/video.mjpg" width="955" height="537"> 
+        <br/>
         {% else %}
-            <h1> Please register/login! </h1>
+        <h1>Please login!</h1>
+        </br>
+        </br>
+        <h3>About PyCam:</h3>
+        <div class='row'>
+            <div class="col-sm-6 col-md-6">
+                <p>PyCam was started out of the idea that i wanted to cheaply install a security camera system in my home. the costs were reasonable for a software developer however i felt this should be more accessable to more people.</p>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <p>
+                    PyCam is a simple django website. it was a nice pet project to get me thinking about new tech and hardware integration over wide area network. designed in mind to be hosted in a cloud network so that when recording your home the data will be safely stored
+                    outside your home so the intruders do not damage the footage. Additionally it can be easily managed and maintained without proprietary systems.
+                    </br>
+                    Out of the gate you can use any old ip cam. But you can also use a rasbery pi webcam if you so desire as well. Overall its just better than a store bought system with roughly the same time investment.
+                </p>
+            </div>
+        </div>
         {% endif %}
+        <br/>
     </div>
+</div>
 {% endblock %}

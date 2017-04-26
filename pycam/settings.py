@@ -13,7 +13,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 STATICFILES_DIRS = (
-  os.path.join(BASE_DIR, "static", "static_dev"),
+  os.path.join(BASE_DIR, "static"),
 )
 
 # Quick-start development settings - unsuitable for production
