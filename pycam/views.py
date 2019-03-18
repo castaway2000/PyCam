@@ -11,9 +11,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework import viewsets, mixins
 
 # models
-from models import *
-from serializers import SnippetSerializer
-from forms import UserForm
+from .models import *
+from .serializers import SnippetSerializer
+from .forms import UserForm
 
 
 #3rd party libs
@@ -33,11 +33,10 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/index')
             else:
                 return HttpResponse("your account is now disabled")
         else:
-            print "Invalid login details: {0}, {1}".format(username, password)
             return HttpResponse("Invalid login details supplied.")
     else:
         context = {'context': ''}
@@ -57,14 +56,14 @@ def user_logout(request):
 #   Index Page   #
 ##################
 def index(request):
-    print "index: " + str(request.user)
+    print("index: " + str(request.user))
     if request.user.is_authenticated:
-        livestream = 'webcam'
+        livestream = 'http://104.157.73.60/cgi-bin/faststream.jpg?stream=half&fps=15&rand=COUNTER'
         context = {'camera': livestream,
                    'user': request.user,
                    'username': request.user.username}
         return render(request, '../templates/index.html', context)
-    HttpResponseRedirect('../templates/login.html')
+    return HttpResponseRedirect('/login')
 
 
 #########################
